@@ -59,7 +59,7 @@
 			<RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%" Click=@(args => OnDeductClick(true)) />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				<RadzenRow AlignItems="AlignItems.Start">
-					<RadzenCheckBox Name="ChongZeroCheckbox"  @bind-Value=@chongZero Style="vertical-align: middle;" />
+					<RadzenCheckBox @oninput="OnChongZeroClick" Name="ChongZeroCheckbox"  @bind-Value=@chongZero Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
 				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(true)) />
@@ -83,6 +83,12 @@
 	private void OnUndoDeductClick(bool IsChong)
 	{
 		scoreToolState.RoundScores[selectedRound - 1].UndoDeduct(IsChong);
+	}
+
+	private void OnChongZeroClick(ChangeEventArgs e)
+	{
+		var val = e.Value;
+
 	}
 
 }
