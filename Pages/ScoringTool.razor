@@ -1,76 +1,88 @@
 @page "/ScoringTool"
+@inject ScoreToolState scoreToolState
+
 
 <PageTitle>Pattern Scoring Tool</PageTitle>
 
 <RadzenRow>
-    <RadzenColumn>
-        <RadzenStack Style="width: 100%; height: 100%">
-            <RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%" />
-            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-                <RadzenRow AlignItems="AlignItems.Start">
-                    <RadzenCheckBox Name="HongZeroCheckbox"  @bind-Value=@hongZero Style="vertical-align: middle;" />
-                    <RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
-                </RadzenRow>
-                <RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" />
-            </RadzenStack>
+	<RadzenColumn>
+		<RadzenStack Style="width: 100%; height: 100%">
+			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%" Click=@(args => OnDeductClick(false)) />
+			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
+				<RadzenRow AlignItems="AlignItems.Start">
+					<RadzenCheckBox Name="HongZeroCheckbox"  @bind-Value=@hongZero Style="vertical-align: middle;" />
+					<RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
+				</RadzenRow>
+				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(false)) />
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenColumn>
+	<RadzenColumn Style="text-align: center">
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center">
+			<RadzenSelectBar TValue="int" Size="ButtonSize.Small" @bind-Value="@selectedRound">
+				<Items>
+					<RadzenSelectBarItem Value="1" Text="Round 1" />
+					<RadzenSelectBarItem Value="2" Text="Round 2" />
+				</Items>
+			</RadzenSelectBar>
+		</RadzenRow>
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px"><RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" /></RadzenRow>
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
+			<table style="text-align: left; margin: 3px">
+				<tr style="border-bottom: 1px solid #808080">
+					<th></th>
+					<th style="padding: 5px; text-align: center">Hong</th>
+					<th style="padding: 5px; text-align: center">Chong</th>
+				</tr>
+				<tr>
+					<td>Round 1</td>
+					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveHongScore().ToString("0.0"))</td>
+					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveChongScore().ToString("0.0"))</td>
+				</tr>
+				<tr>
+					<td>Round 2</td>
+					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
+					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
+				</tr>
 
-
-
-        </RadzenStack>
-    </RadzenColumn>
-    <RadzenColumn Style="text-align: center">
-        <RadzenRow JustifyContent="Radzen.JustifyContent.Center">
-            <RadzenSelectBar TValue="int" Size="ButtonSize.Small" @bind-Value="@selectedRound">
-                <Items>
-                    <RadzenSelectBarItem Value="1" Text="Round 1" />
-                    <RadzenSelectBarItem Value="2" Text="Round 2" />
-                </Items>
-            </RadzenSelectBar>
-        </RadzenRow>
-        <RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px"><RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" /></RadzenRow>
-        <RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
-        <table style="text-align: left; margin: 3px">
-          <tr style="border-bottom: 1px solid #808080">
-            <th></th>
-            <th style="padding: 5px; text-align: center">Hong</th>
-            <th style="padding: 5px; text-align: center">Chong</th>
-          </tr>
-          <tr>
-            <td>Round 1</td>
-            <td style="text-align: center">8.8</td>
-            <td style="text-align: center">8.8</td>
-          </tr>
-          <tr>
-            <td>Round 1</td>
-            <td style="text-align: center">8.8</td>
-            <td style="text-align: center">8.8</td>
-          </tr>
-          <tr style="border-top: 1px solid #808080; border-bottom: 1px solid #808080">
-            <td style="font-style: italic;">Total</td>
-            <td style="text-align: center; font-style: italic">18.8</td>
-            <td style="text-align: center; font-style: italic">18.8</td>
-          </tr>
-        </table>
-        
-        </RadzenRow>
-    </RadzenColumn>
-    <RadzenColumn>
-        <RadzenStack Style="width: 100%; height: 100%">
-
-            <RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%" />
-            <RadzenRow AlignItems="AlignItems.Start">
-                <RadzenCheckBox Name="ChongZeroCheckbox"  @bind-Value=@chongZero/>
-                <RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
-                <RadzenButton Text="+0.2" />
-            </RadzenRow>
-        </RadzenStack>
-    </RadzenColumn>
+				<tr style="border-top: 1px solid #808080; border-bottom: 1px solid #808080">
+					<td style="font-style: italic;">Total</td>
+					<td style="text-align: center; font-style: italic">@(scoreToolState.GetTotalHongScore().ToString("0.0"))</td>
+					<td style="text-align: center; font-style: italic">@(scoreToolState.GetTotalChongScore().ToString("0.0"))</td>
+				</tr>
+			</table>
+		
+	</RadzenRow>
+	</RadzenColumn>
+	<RadzenColumn>
+		<RadzenStack Style="width: 100%; height: 100%">
+			<RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%" Click=@(args => OnDeductClick(true)) />
+			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
+				<RadzenRow AlignItems="AlignItems.Start">
+					<RadzenCheckBox Name="ChongZeroCheckbox"  @bind-Value=@chongZero Style="vertical-align: middle;" />
+					<RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
+				</RadzenRow>
+				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(true)) />
+			</RadzenStack>
+		</RadzenStack>
+	</RadzenColumn>
 </RadzenRow>
 
 
 @code {
-    private bool hongZero = false;
-    private bool chongZero = false;
-    private int selectedRound = 1;
+
+	private bool hongZero = false;
+	private bool chongZero = false;
+	private int selectedRound = 1;
+
+	private void OnDeductClick(bool IsChong)
+	{
+		scoreToolState.RoundScores[selectedRound - 1].Deduct(IsChong);
+	}
+
+	private void OnUndoDeductClick(bool IsChong)
+	{
+		scoreToolState.RoundScores[selectedRound - 1].UndoDeduct(IsChong);
+	}
 
 }

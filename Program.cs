@@ -13,6 +13,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 builder.Services.AddRadzenComponents();
 
+builder.Services.AddSingleton<ScoreToolState>();
+
 await builder.Build().RunAsync();
 
 
