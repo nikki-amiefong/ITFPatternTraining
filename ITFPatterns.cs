@@ -102,10 +102,15 @@
 
 	public class RoundScore
 	{
-		public decimal HongScore = 10;
-		public bool IsHongZero = false;
-		public decimal ChongScore = 10;
-		public bool IsChongZero = false;
+		public decimal HongScore;
+		public bool IsHongZero;
+		public decimal ChongScore;
+		public bool IsChongZero;
+
+		public RoundScore()
+		{
+			ResetScores();
+		}
 
 		public decimal GetEffectiveHongScore()
 		{
@@ -147,6 +152,14 @@
 				else HongScore += 0.2M;
 			}
 		}
+
+		public void ResetScores()
+		{
+			HongScore = 10.0M;
+			ChongScore = 10.0M;
+			IsHongZero = false;
+			IsChongZero = false;
+		}
 	}
 
 	/// <summary>
@@ -173,6 +186,15 @@
 		{
 			return RoundScores[0].GetEffectiveChongScore() + RoundScores[1].GetEffectiveChongScore();
 		}
+	}
+
+	public class PatternSelectorState
+	{
+		public string Rank = "1st Dan";
+		public bool Saju = false;
+		public bool AddTwoPatterns = false;
+
+		public List<SelectedPattern> SelectedPatterns = new List<SelectedPattern>();
 	}
 
 }

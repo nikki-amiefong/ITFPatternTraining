@@ -10,7 +10,7 @@
 			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%" Click=@(args => OnDeductClick(false)) />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				<RadzenRow AlignItems="AlignItems.Start">
-					<RadzenCheckBox Name="HongZeroCheckbox"  @bind-Value=@hongZero Style="vertical-align: middle;" />
+					<RadzenCheckBox Name="HongZeroCheckbox" @oninput="OnHongZeroClick" @bind-Value=@hongZero Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
 				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(false)) />
@@ -19,14 +19,14 @@
 	</RadzenColumn>
 	<RadzenColumn Style="text-align: center">
 		<RadzenRow JustifyContent="Radzen.JustifyContent.Center">
-			<RadzenSelectBar TValue="int" Size="ButtonSize.Small" @bind-Value="@selectedRound">
+			<RadzenSelectBar TValue="int" Size="ButtonSize.Small" @bind-Value="@selectedRound" Change="@(args => UpdateZeroCheckboxs())">
 				<Items>
 					<RadzenSelectBarItem Value="1" Text="Round 1" />
 					<RadzenSelectBarItem Value="2" Text="Round 2" />
 				</Items>
 			</RadzenSelectBar>
 		</RadzenRow>
-		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px"><RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" /></RadzenRow>
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px"><RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" Click="@(args => OnResetClick())" /></RadzenRow>
 		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
 			<table style="text-align: left; margin: 3px">
 				<tr style="border-bottom: 1px solid #808080">
@@ -35,13 +35,13 @@
 					<th style="padding: 5px; text-align: center">Chong</th>
 				</tr>
 				<tr>
-					<td>Round 1</td>
+					<td>Rnd 1</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 				<tr>
-					<td>Round 2</td>
-					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
+					<td>Rnd 2</td>
+					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 
@@ -85,10 +85,37 @@
 		scoreToolState.RoundScores[selectedRound - 1].UndoDeduct(IsChong);
 	}
 
+	private void OnHongZeroClick(ChangeEventArgs e)
+	{
+		if (e.Value is not null)
+			scoreToolState.RoundScores[selectedRound - 1].IsHongZero = (bool)e.Value;
+	}
+
 	private void OnChongZeroClick(ChangeEventArgs e)
 	{
-		var val = e.Value;
+		if (e.Value is not null)
+			scoreToolState.RoundScores[selectedRound - 1].IsChongZero = (bool)e.Value;
+	}
 
+	private void OnResetClick()
+	{
+		// reset both rounds - could just reset the selected round though if desired
+		//scoreToolState.RoundScores[selectedRound - 1].ResetScores();
+		scoreToolState.RoundScores[0].ResetScores();
+		scoreToolState.RoundScores[1].ResetScores();
+
+		UpdateZeroCheckboxs();
+	}
+
+	private void UpdateZeroCheckboxs()
+	{
+		hongZero = scoreToolState.RoundScores[selectedRound - 1].IsHongZero;
+		chongZero = scoreToolState.RoundScores[selectedRound - 1].IsChongZero;
+	}
+
+	protected override async Task OnInitializedAsync()
+	{
+		UpdateZeroCheckboxs();
 	}
 
 }
