@@ -1,4 +1,4 @@
-# ITFPatternTraining
+# ITF Pattern Training tool
 
 Tools to assist training ITF Taekwon-Do patterns.
 
@@ -15,5 +15,5 @@ the *[2022 scoring rules](https://itftkd.sport/wp-content/uploads/2022/04/Offici
 
 ## Author
 
-Nikki Amie-Fong
+Nikki Amie-Fong  
 <nikki.amiefong@gmail.com>
