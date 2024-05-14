@@ -99,4 +99,102 @@
         public string Pattern { get; set; }
     }
 
+
+	public class RoundScore
+	{
+		public decimal HongScore;
+		public bool IsHongZero;
+		public decimal ChongScore;
+		public bool IsChongZero;
+
+		public RoundScore()
+		{
+			ResetScores();
+		}
+
+		public decimal GetEffectiveHongScore()
+		{
+			if (IsHongZero) return 0M;
+			else return HongScore;
+		}
+
+		public decimal GetEffectiveChongScore()
+		{
+			if (IsChongZero) return 0M;
+			else return ChongScore;
+		}
+
+		public void Deduct(bool IsChong)
+		{
+			if (IsChong)
+			{
+				if (ChongScore == 0) return;
+				else ChongScore -= 0.2M;
+			}
+			else
+			{
+				if (HongScore == 0) return;
+				else HongScore -= 0.2M;
+			}
+		}
+
+
+		public void UndoDeduct(bool IsChong)
+		{
+			if (IsChong)
+			{
+				if (ChongScore == 10) return;
+				else ChongScore += 0.2M;
+			}
+			else
+			{
+				if (HongScore == 10) return;
+				else HongScore += 0.2M;
+			}
+		}
+
+		public void ResetScores()
+		{
+			HongScore = 10.0M;
+			ChongScore = 10.0M;
+			IsHongZero = false;
+			IsChongZero = false;
+		}
+	}
+
+	/// <summary>
+	/// Stores the state of the scoring tool
+	/// Designed to be persisted globally in the app, so that it survives tab changes
+	/// See https://stackoverflow.com/questions/71713761/how-can-i-declare-a-global-variables-model-in-blazor?rq=3
+	/// </summary>
+	public class ScoreToolState
+	{
+		public RoundScore[] RoundScores = new RoundScore[2];
+
+		public ScoreToolState() 
+		{
+			RoundScores[0] = new RoundScore();
+			RoundScores[1] = new RoundScore();
+		}
+
+		public decimal GetTotalHongScore()
+		{
+			return RoundScores[0].GetEffectiveHongScore() + RoundScores[1].GetEffectiveHongScore();
+		}
+
+		public decimal GetTotalChongScore()
+		{
+			return RoundScores[0].GetEffectiveChongScore() + RoundScores[1].GetEffectiveChongScore();
+		}
+	}
+
+	public class PatternSelectorState
+	{
+		public string Rank = "1st Dan";
+		public bool Saju = false;
+		public bool AddTwoPatterns = false;
+
+		public List<SelectedPattern> SelectedPatterns = new List<SelectedPattern>();
+	}
+
 }
