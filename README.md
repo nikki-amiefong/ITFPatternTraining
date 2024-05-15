@@ -4,7 +4,8 @@ Tools to assist training ITF Taekwon-Do patterns.
 
 App is available at https://nikki-amiefong.github.io/ITFPatternTraining/
 
-[![Build/Deploy to GitHub Pages](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/dotnet.yml)
+[![Build/Deploy](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/dotnet.yml)  
+[![pages-build-deployment](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/pages/pages-build-deployment)
 
 ## Random Selector
 
