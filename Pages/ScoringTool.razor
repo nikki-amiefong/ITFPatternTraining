@@ -13,7 +13,7 @@
 					<RadzenCheckBox Name="HongZeroCheckbox" @oninput="OnHongZeroClick" @bind-Value=@hongZero Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
-				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(false)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" ButtonStyle="ButtonStyle.Success" Click=@(args => OnUndoDeductClick(false)) class="disable-dbl-tap-zoom" />
 			</RadzenStack>
 		</RadzenStack>
 	</RadzenColumn>
@@ -31,22 +31,22 @@
 			<table style="text-align: left; margin: 3px">
 				<tr style="border-bottom: 1px solid #808080">
 					<th></th>
-					<th style="padding: 5px; text-align: center">Hong</th>
-					<th style="padding: 5px; text-align: center">Chong</th>
+					<th style="padding: 5px; text-align: center"><RadzenText TextStyle="TextStyle.Overline">Hong</RadzenText></th>
+					<th style="padding: 5px; text-align: center"><RadzenText TextStyle="TextStyle.Overline">Chong</RadzenText></th>
 				</tr>
 				<tr>
-					<td>Rnd 1</td>
+					<td>R1</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 				<tr>
-					<td>Rnd 2</td>
+					<td>R2</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 
 				<tr style="border-top: 1px solid #808080; border-bottom: 1px solid #808080">
-					<td style="font-style: italic;">Total</td>
+					<td style="font-style: italic;"></td>
 					<td style="text-align: center; font-style: italic">@(scoreToolState.GetTotalHongScore().ToString("0.0"))</td>
 					<td style="text-align: center; font-style: italic">@(scoreToolState.GetTotalChongScore().ToString("0.0"))</td>
 				</tr>
@@ -62,7 +62,7 @@
 					<RadzenCheckBox @oninput="OnChongZeroClick" Name="ChongZeroCheckbox"  @bind-Value=@chongZero Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
-				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(true)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" ButtonStyle="ButtonStyle.Success" Click=@(args => OnUndoDeductClick(true)) class="disable-dbl-tap-zoom" />
 			</RadzenStack>
 		</RadzenStack>
 	</RadzenColumn>

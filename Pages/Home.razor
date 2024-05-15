@@ -5,9 +5,8 @@
 <PageTitle>Random Pattern Selector</PageTitle>
 
 <RadzenStack Orientation="Orientation.Vertical">
-		<RadzenText Text="Randomly picks ITF patterns for training. Supports selecting multiple rounds" TextStyle="Radzen.Blazor.TextStyle.Subtitle2" TagName="Radzen.Blazor.TagName.Auto" class="mt-4" Style="font-size: 20px; line-height: 24px"></RadzenText>
-		<RadzenRow AlignItems="AlignItems.Center">
-			<RadzenLabel Text="Competitor rank: " Component="DropDownBindValue" Style="margin-right: 8px; vertical-align: middle" />
+		<RadzenText Text="Randomly picks ITF patterns for training. Supports selecting multiple rounds." TextStyle="Radzen.Blazor.TextStyle.Body1" TagName="Radzen.Blazor.TagName.Auto"></RadzenText>
+		<RadzenRow AlignItems="AlignItems.Normal">
 			<RadzenSelectBar @bind-Value="@(patternSelectorState.Rank)" Name="RankSelection" TextProperty="Text" ValueProperty="Value" Data="@ITFPatterns.ranks" Size="ButtonSize.Small" Class="rz-display-none rz-display-xl-flex" />
 			<RadzenDropDown @bind-Value="@(patternSelectorState.Rank)" Name="RankSelection" Data="@ITFPatterns.ranks" Class="rz-display-flex rz-display-xl-none" />
 		</RadzenRow>
