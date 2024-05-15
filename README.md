@@ -1,6 +1,10 @@
 # ITF Pattern Training tool
 
-Tools to assist training ITF Taekwon-Do patterns.
+Tools to assist training ITF Taekwon-Do patterns.  
+
+App is available at https://nikki-amiefong.github.io/ITFPatternTraining/
+
+[![Build/Deploy to GitHub Pages](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/dotnet.yml/badge.svg)](https://github.com/nikki-amiefong/ITFPatternTraining/actions/workflows/dotnet.yml)
 
 ## Random Selector
 
