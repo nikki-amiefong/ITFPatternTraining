@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "ITFPatternTraining",
   "resources": {
-    "hash": "sha256-MYxamTKHa58JsGkouqBN5quPF+4tjWj9cWPW6ZsZHeE=",
+    "hash": "sha256-szkbI8V43DdyhPKcU3yWL5N7trllAgBwEzwYrnSirr8=",
     "jsModuleNative": {
       "dotnet.native.8.0.5.hmh8qelhq7.js": "sha256-xkAIw2gXdNAoKSgJNNXBPjrj2jNf2RPNGpSjKwrn7Oc="
     },
@@ -17,7 +17,7 @@
       "icudt_no_CJK.dat": "sha256-L7sV7NEYP37/Qr2FPCePo5cJqRgTXRwGHuwF5Q+0Nfs="
     },
     "assembly": {
-      "ITFPatternTraining.wasm": "sha256-byOwXEe0TdUt5mWXgzwWtIeyp8ww59vxbFmefHi9ivI=",
+      "ITFPatternTraining.wasm": "sha256-bxF021+P6EfivwIxcs2gV7n82QlLKUTxTVXDEKVR7lQ=",
       "Microsoft.AspNetCore.Components.Forms.wasm": "sha256-OfGyCjbW7X2CykcWDxo5dYVqyO6JnReuHFoBoevztGY=",
       "Microsoft.AspNetCore.Components.wasm": "sha256-6NunG8dff0XOuWFRSN/M8xfJQsjXEF5QONKEq34pudI=",
       "Microsoft.AspNetCore.Components.Web.wasm": "sha256-OHjIDwFOuBwqsQsrZgrkTbie2cbmxMQwlL6hs3RGA+8=",
