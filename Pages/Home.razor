@@ -20,8 +20,8 @@
 			<RadzenLabel Text="World Championships mode" Component="AddTwoPatternsCheckbox" Style="margin-right: 8px; vertical-align: middle;" />
 		</RadzenRow>
 		<RadzenRow>
-			<RadzenButton Click="@SelectPattern" Text="Pick Pattern" ButtonStyle="ButtonStyle.Primary" />
-			<RadzenButton Click="@Reset" Text="Reset" ButtonStyle="ButtonStyle.Danger" />
+		<RadzenButton Click="@SelectPattern" Text="Pick Pattern" ButtonStyle="ButtonStyle.Primary" class="disable-dbl-tap-zoom" Icon="add" />
+			<RadzenButton Click="@Reset" Text="Reset" ButtonStyle="ButtonStyle.Danger" class="disable-dbl-tap-zoom" />
 		</RadzenRow>
 		<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" FlexWrap="FlexWrap.Wrap" Gap="1rem" Class="rz-p-4 rz-mb-6">
 			<RadzenTimeline Orientation="Orientation.Vertical" LinePosition="LinePosition.Center" Style="min-width: 300px">
