@@ -5,7 +5,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ITF Pattern Training</title>
-    <base href="https://nikki-amiefong.github.io/ITFPatternTraining/" />
+    <!-- set the base href dynamically - if app is running locally for development vs running on GitHub Pages. From https://stackoverflow.com/a/63055103 -->
+    <script type="text/javascript">
+        var appBase = document.createElement('base');
+        appBase.href = "https://nikki-amiefong.github.io/ITFPatternTraining/";
+        if (window.location.href.indexOf("localhost") > -1) {
+            appBase.href = "/";
+        }
+        document.head.appendChild(appBase);
+    </script>
+
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link rel="stylesheet" href="css/app.css" />
     <link rel="icon" type="image/png" href="favicon.png" />
