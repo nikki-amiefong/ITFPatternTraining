@@ -1,6 +1,10 @@
 ﻿self.assetsManifest = {
   "assets": [
     {
+      "hash": "sha256-8ZRc1sGeVrPBx4lD717BgRaQekyh78QKV9SKsdt638U=",
+      "url": ".nojekyll"
+    },
+    {
       "hash": "sha256-yis2dNdJ6e9R472mcuwUOsxBPCQX3snSMmHAL3zu2D8=",
       "url": "css\/app.css"
     },
@@ -57,7 +61,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-jNStBdnuSe7+1oEx2o5qY6UnV5nfgp8a+Kp+lI7OGJc=",
+      "hash": "sha256-yVEPxVCMJnMLMKpHyn7e8a2PKTgagcy7kvutWa2\/XHk=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -69,7 +73,7 @@
       "url": "_framework\/dotnet.native.wasm"
     },
     {
-      "hash": "sha256-NJvBfTpffQIiKYUwHiMe8gcRMPL+xCGXRHuf6b9mfr8=",
+      "hash": "sha256-A1GNSq3Qffvzj4i5Fc0DmVoSV2iqZhTGAQdM46KUplg=",
       "url": "_framework\/ITFPatternTraining.wasm"
     },
     {
@@ -501,5 +505,5 @@
       "url": "_content\/Radzen.Blazor\/Radzen.Blazor.js"
     }
   ],
-  "version": "noi4G4oz"
+  "version": "7oUjln\/u"
 };
