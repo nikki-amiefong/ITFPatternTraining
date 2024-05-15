@@ -1,4 +1,6 @@
 name: build and test and deploy
+permissions:
+  contents: write
 
 on:
   push:
