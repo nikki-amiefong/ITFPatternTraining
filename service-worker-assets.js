@@ -29,7 +29,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-\/qMNmcXNRxFrVcFGWele8daLDcCHcDLePm2siCToRAU=",
+      "hash": "sha256-WXnR81vBKDVM7PIppbY\/wG+1yeSyCIhYeW3jqSR1ALQ=",
       "url": "index.html"
     },
     {
@@ -61,7 +61,7 @@
       "url": "_framework\/icudt_no_CJK.dat"
     },
     {
-      "hash": "sha256-5pWTZwZcI7BUMoOY3T8HPACa56BKlXUf3n0xP5\/fCrc=",
+      "hash": "sha256-AeLL5Xu89u7TdWFx9FjRGvHaA7zJ26e21lUL5yaOV9c=",
       "url": "_framework\/blazor.boot.json"
     },
     {
@@ -73,7 +73,7 @@
       "url": "_framework\/dotnet.native.wasm"
     },
     {
-      "hash": "sha256-W\/gADo7RaKQ9osIQjyzbpMjrwNu5aQMYh7r0sYbWXWc=",
+      "hash": "sha256-cJoZuLfk5tIkixoNbcUCXHq4+RiTJW8YrmuQKwFDI14=",
       "url": "_framework\/ITFPatternTraining.wasm"
     },
     {
@@ -505,5 +505,5 @@
       "url": "_content\/Radzen.Blazor\/Radzen.Blazor.js"
     }
   ],
-  "version": "EMELlZ\/l"
+  "version": "khhXqHNb"
 };
