@@ -122,24 +122,18 @@
 		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private async Task OnHongZeroClick(ChangeEventArgs e)
+	private void OnHongZeroClick(ChangeEventArgs e)
 	{
 		if (e.Value is not null)
-		{
 			scoreToolState.RoundScores[selectedRound - 1].IsHongZero = (bool)e.Value;
-			await JS.InvokeVoidAsync("vibrateOnButtonPress");
-		}
 
 
 	}
 
-	private async Task OnChongZeroClick(ChangeEventArgs e)
+	private void OnChongZeroClick(ChangeEventArgs e)
 	{
 		if (e.Value is not null)
-		{
 			scoreToolState.RoundScores[selectedRound - 1].IsChongZero = (bool)e.Value;
-			await JS.InvokeVoidAsync("vibrateOnButtonPress");
-		}
 	}
 
 	private async Task OnResetClick()
