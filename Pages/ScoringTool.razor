@@ -1,13 +1,48 @@
 @page "/ScoringTool"
 @inject ScoreToolState scoreToolState
+@inject IJSRuntime JS
 
 
 <PageTitle>Pattern Scoring Tool</PageTitle>
 
+<script>
+	function vibrateOnButtonPress() {
+		if (!window) {
+			return;
+		}
+
+		if (!window.navigator) {
+			return;
+		}
+
+		if (!window.navigator.vibrate) {
+			return;
+		}
+
+		window.navigator.vibrate(50);
+	}
+
+	function vibrateOnResetPress() {
+		if (!window) {
+			return;
+		}
+
+		if (!window.navigator) {
+			return;
+		}
+
+		if (!window.navigator.vibrate) {
+			return;
+		}
+
+		window.navigator.vibrate(100, 50, 100);
+	}
+</script>
+
 <RadzenRow>
 	<RadzenColumn>
 		<RadzenStack Style="height: 100%">
-			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%;" Click=@(args => OnDeductClick(false)) class="disable-dbl-tap-zoom" />
+			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%;" Click=@(args => OnDeductClick(false)) class="disable-dbl-tap-zoom" onclick="vibrate()" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				<RadzenRow AlignItems="AlignItems.Start">
 					<RadzenCheckBox Name="HongZeroCheckbox" @oninput="OnHongZeroClick" @bind-Value=@hongZero Style="vertical-align: middle;" />
@@ -75,29 +110,39 @@
 	private bool chongZero = false;
 	private int selectedRound = 1;
 
-	private void OnDeductClick(bool IsChong)
+	private async Task OnDeductClick(bool IsChong)
 	{
 		scoreToolState.RoundScores[selectedRound - 1].Deduct(IsChong);
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnUndoDeductClick(bool IsChong)
+	private async Task OnUndoDeductClick(bool IsChong)
 	{
 		scoreToolState.RoundScores[selectedRound - 1].UndoDeduct(IsChong);
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnHongZeroClick(ChangeEventArgs e)
+	private async Task OnHongZeroClick(ChangeEventArgs e)
 	{
 		if (e.Value is not null)
+		{
 			scoreToolState.RoundScores[selectedRound - 1].IsHongZero = (bool)e.Value;
+			await JS.InvokeVoidAsync("vibrateOnButtonPress");
+		}
+
+
 	}
 
-	private void OnChongZeroClick(ChangeEventArgs e)
+	private async Task OnChongZeroClick(ChangeEventArgs e)
 	{
 		if (e.Value is not null)
+		{
 			scoreToolState.RoundScores[selectedRound - 1].IsChongZero = (bool)e.Value;
+			await JS.InvokeVoidAsync("vibrateOnButtonPress");
+		}
 	}
 
-	private void OnResetClick()
+	private async Task OnResetClick()
 	{
 		// reset both rounds - could just reset the selected round though if desired
 		//scoreToolState.RoundScores[selectedRound - 1].ResetScores();
@@ -105,6 +150,8 @@
 		scoreToolState.RoundScores[1].ResetScores();
 
 		UpdateZeroCheckboxs();
+
+		await JS.InvokeVoidAsync("vibrateOnResetPress");
 	}
 
 	private void UpdateZeroCheckboxs()
@@ -115,7 +162,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		UpdateZeroCheckboxs();
+		await Task.Run(UpdateZeroCheckboxs);
 	}
 
 }
