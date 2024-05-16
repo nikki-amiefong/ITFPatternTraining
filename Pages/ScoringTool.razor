@@ -44,8 +44,8 @@
 		<RadzenStack Style="height: 100%">
 			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%;" Click=@(args => OnDeductClick(false)) class="disable-dbl-tap-zoom" onclick="vibrate()" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-				<RadzenRow AlignItems="AlignItems.Start">
-					<RadzenCheckBox Name="HongZeroCheckbox" TValue="bool" Value=@hongZero Change=@(args => OnHongZeroClick(args)) Style="vertical-align: middle;" />
+				<RadzenRow AlignItems="AlignItems.Start" Style="vertical-align: middle;">
+					<RadzenSwitch Name="HongZeroCheckbox" TValue="bool" @bind-Value=@hongZero Change=@OnHongZeroClick Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
 				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" ButtonStyle="ButtonStyle.Success" Click=@(args => OnUndoDeductClick(false)) class="disable-dbl-tap-zoom" />
@@ -94,8 +94,9 @@
 			<RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%" Click=@(args => OnDeductClick(true)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				<RadzenRow AlignItems="AlignItems.Start">
-					<RadzenCheckBox TValue="bool" Value=@chongZero Change=@(args => OnChongZeroClick(args)) Name="ChongZeroCheckbox" Style="vertical-align: middle;" />
+					<RadzenSwitch TValue="bool" @bind-Value=@chongZero Change=@OnChongZeroClick Name="ChongZeroCheckbox" Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
+
 				</RadzenRow>
 				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" ButtonStyle="ButtonStyle.Success" Click=@(args => OnUndoDeductClick(true)) class="disable-dbl-tap-zoom" />
 			</RadzenStack>
@@ -122,17 +123,15 @@
 		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private async Task OnHongZeroClick(bool newValue)
+	private async Task OnHongZeroClick()
 	{
-		hongZero = newValue;
-		scoreToolState.RoundScores[selectedRound - 1].IsHongZero = newValue;
+		scoreToolState.RoundScores[selectedRound - 1].IsHongZero = hongZero;
 		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private async Task OnChongZeroClick(bool newValue)
+	private async Task OnChongZeroClick()
 	{
-		chongZero = newValue;
-		scoreToolState.RoundScores[selectedRound - 1].IsChongZero = newValue;
+		scoreToolState.RoundScores[selectedRound - 1].IsChongZero = chongZero;
 		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
