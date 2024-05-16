@@ -44,7 +44,7 @@
 		<RadzenStack Style="height: 100%">
 			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%;" Click=@(args => OnDeductClick(false)) class="disable-dbl-tap-zoom" onclick="vibrate()" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-				<RadzenRow AlignItems="AlignItems.Start" Style="vertical-align: middle;">
+				<RadzenRow AlignItems="AlignItems.Center" Style="vertical-align: middle;">
 					<RadzenSwitch Name="HongZeroCheckbox" TValue="bool" @bind-Value=@hongZero Change=@OnHongZeroClick Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
@@ -93,7 +93,7 @@
 		<RadzenStack Style="height: 100%">
 			<RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%" Click=@(args => OnDeductClick(true)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-				<RadzenRow AlignItems="AlignItems.Start">
+				<RadzenRow AlignItems="AlignItems.Center">
 					<RadzenSwitch TValue="bool" @bind-Value=@chongZero Change=@OnChongZeroClick Name="ChongZeroCheckbox" Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
 
