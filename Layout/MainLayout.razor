@@ -7,9 +7,9 @@
             <RadzenLabel Text="ITF Pattern Training Tools" />
         </RadzenStack>
     </RadzenHeader>
-    <RadzenSidebar @bind-Expanded="@sidebar1Expanded">
+    <RadzenSidebar Responsive="false" @bind-Expanded="@sidebar1Expanded">
         <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Pattern Picker" Icon="accessibility" Path="PatternPicker" Selected="true" />
+            <RadzenPanelMenuItem Text="Pattern Picker" Icon="accessibility" Path="PatternPicker" />
             <RadzenPanelMenuItem Text="Scoring Tool" Icon="alarm_add" Path="ScoringTool" />
         </RadzenPanelMenu>
         <div class="rz-p-4">
@@ -27,5 +27,5 @@
 </RadzenLayout>
 
 @code {
-    bool sidebar1Expanded = true;
+    bool sidebar1Expanded = false;
 }

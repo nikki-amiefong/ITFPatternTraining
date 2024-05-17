@@ -3,12 +3,11 @@
 	public class ITFPatterns
 	{
 		public static readonly string[] colourBeltPatterns = {
-			"Saju-Jirigi",
-			"Saji-Maki",
 			"Chon-Ji",
 			"Dan-Gun",
 			"Do-San",
 			"Won-Hyo",
+			"Yul-Gok",
 			"Joong-Gun",
 			"Toi-Gye",
 			"Hwa-rang",
@@ -34,7 +33,7 @@
 		};
 
 		public static readonly string[] Dan4Patterns = {
-			 "Yon-Gae",
+			"Yon-Gae",
 			"Ul-Ji",
 			"Moon-Moo"
 		};
@@ -191,7 +190,6 @@
 	public class PatternSelectorState
 	{
 		public string Rank = "1st Dan";
-		public bool Saju = false;
 		public bool AddTwoPatterns = false;
 
 		public List<SelectedPattern> SelectedPatterns = new List<SelectedPattern>();
