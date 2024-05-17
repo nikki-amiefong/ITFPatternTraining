@@ -18,6 +18,8 @@ rounds of this can be selected as well - repeatetly select the "Pick Pattern" bu
 Can be used to score patterns of two competitors, using 0.2 deductions from a starting score of 10.0. This is designed to be used when scoring according to
 the *[2022 scoring rules](https://itftkd.sport/wp-content/uploads/2022/04/Official-ITF-Rules-of-Competition-Version-2022v1.pdf#page=68)* from itftkd.sport.
 
+This is designed to be used on a mobile device, in landscape orientation - the layout isn't helpful in portrait.
+
 ## Author
 
 Nikki Amie-Fong  

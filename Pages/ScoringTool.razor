@@ -39,9 +39,9 @@
 	}
 </script>
 
-<RadzenRow>
+<RadzenRow Gap="0.2rem">
 	<RadzenColumn>
-		<RadzenStack Style="height: 100%">
+		<RadzenStack Style="height: 100%" Gap="1.0rem">
 			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%;" Click=@(args => OnDeductClick(false)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				<RadzenRow AlignItems="AlignItems.Center" Style="vertical-align: middle;">
@@ -53,7 +53,7 @@
 		</RadzenStack>
 	</RadzenColumn>
 	<RadzenColumn Style="text-align: center">
-		<RadzenRow JustifyContent="Radzen.JustifyContent.Center">
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Gap="0.6rem">
 			<RadzenSelectBar TValue="int" Size="ButtonSize.Small" @bind-Value="@selectedRound" Change="@(args => UpdateZeroCheckboxs())">
 				<Items>
 					<RadzenSelectBarItem Value="1" Text="Round 1" />
@@ -61,21 +61,23 @@
 				</Items>
 			</RadzenSelectBar>
 		</RadzenRow>
-		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px"><RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" Click="@(args => OnResetClick())" /></RadzenRow>
 		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
-			<table style="text-align: left; margin: 3px">
+			<RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" Click="@(args => OnResetClick())" />
+		</RadzenRow>
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
+			<table style="text-align: left; margin: 3px; vertical-align: central">
 				<tr style="border-bottom: 1px solid #808080">
 					<th></th>
 					<th style="padding: 5px; text-align: center"><RadzenText TextStyle="TextStyle.Overline">Hong</RadzenText></th>
 					<th style="padding: 5px; text-align: center"><RadzenText TextStyle="TextStyle.Overline">Chong</RadzenText></th>
 				</tr>
 				<tr>
-					<td>R1</td>
+					<td><RadzenText TextStyle="TextStyle.Overline">R1</RadzenText></td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 				<tr>
-					<td>R2</td>
+					<td><RadzenText TextStyle="TextStyle.Overline">R2</RadzenText></td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
@@ -90,7 +92,7 @@
 	</RadzenRow>
 	</RadzenColumn>
 	<RadzenColumn>
-		<RadzenStack Style="height: 100%">
+		<RadzenStack Style="height: 100%" Gap="1.0rem">
 			<RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%" Click=@(args => OnDeductClick(true)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				<RadzenRow AlignItems="AlignItems.Center" Style="vertical-align: middle;">

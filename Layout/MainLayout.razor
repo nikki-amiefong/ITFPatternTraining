@@ -9,8 +9,8 @@
     </RadzenHeader>
     <RadzenSidebar Responsive="false" @bind-Expanded="@sidebar1Expanded">
         <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Pattern Picker" Icon="accessibility" Path="PatternPicker" />
-            <RadzenPanelMenuItem Text="Scoring Tool" Icon="alarm_add" Path="ScoringTool" />
+            <RadzenPanelMenuItem Text="Pattern Picker" Icon="accessibility" Path="PatternPicker" Click=@(args => sidebar1Expanded = false) />
+            <RadzenPanelMenuItem Text="Scoring Tool" Icon="alarm_add" Path="ScoringTool" Click=@(args => sidebar1Expanded = false) />
         </RadzenPanelMenu>
         <div class="rz-p-4">
             <a href="https://github.com/nikki-amiefong/ITFPatternTraining/blob/main/README.md" target="_blank">About</a>
