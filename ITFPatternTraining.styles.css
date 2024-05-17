@@ -76,3 +76,19 @@ main[b-c9nve5igob] {
         padding-right: 1.5rem !important;
     }
 }
+/* /Pages/ScoringTool.razor.rz.scp.css */
+@media screen and (orientation: landscape) {
+	.rotate-device-warning[b-b002tslbgb] {
+		display: none;
+	}
+}
+
+@media screen and (orientation: portrait) {
+	.rotate-device-warning[b-b002tslbgb] {
+		display: block;
+		width: 100%;
+		background-color: lightyellow;
+		padding: 10px;
+		border: 2px solid red;
+	}
+}
