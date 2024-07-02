@@ -80,15 +80,16 @@
 
 		public static List<string> GetRankPatterns(int rank)
 		{
-			var possiblePatterns = new List<string>();
-			if (rank == 1) possiblePatterns.AddRange(Dan1Patterns);
-			if (rank == 2) possiblePatterns.AddRange(Dan2Patterns);
-			if (rank == 3) possiblePatterns.AddRange(Dan3Patterns);
-			if (rank == 4) possiblePatterns.AddRange(Dan4Patterns);
-			if (rank == 5) possiblePatterns.AddRange(Dan5Patterns);
-			if (rank == 6) possiblePatterns.AddRange(Dan6Patterns);
-
-			return possiblePatterns;
+			switch (rank)
+			{
+				case 1: return Dan1Patterns.ToList<string>();
+				case 2: return Dan2Patterns.ToList<string>();
+				case 3: return Dan3Patterns.ToList<string>();
+				case 4: return Dan4Patterns.ToList<string>();
+				case 5: return Dan5Patterns.ToList<string>();
+				case 6: return Dan6Patterns.ToList<string>();
+				default: throw new ArgumentOutOfRangeException(paramName: "rank", message: "The rank parameter should be between 1 and 6 inclusive.");
+			}
 		}
 	}
 
@@ -101,6 +102,9 @@
 
 	public class RoundScore
 	{
+		public const decimal MAXIMUM_SCORE = 10.0M;
+		public const decimal SCORE_INCREMENT = 0.2M;
+
 		public decimal HongScore;
 		public bool IsHongZero;
 		public decimal ChongScore;
@@ -128,12 +132,12 @@
 			if (IsChong)
 			{
 				if (ChongScore == 0) return;
-				else ChongScore -= 0.2M;
+				else ChongScore -= SCORE_INCREMENT;
 			}
 			else
 			{
 				if (HongScore == 0) return;
-				else HongScore -= 0.2M;
+				else HongScore -= SCORE_INCREMENT;
 			}
 		}
 
@@ -142,20 +146,20 @@
 		{
 			if (IsChong)
 			{
-				if (ChongScore == 10) return;
-				else ChongScore += 0.2M;
+				if (ChongScore == MAXIMUM_SCORE) return;
+				else ChongScore += SCORE_INCREMENT;
 			}
 			else
 			{
-				if (HongScore == 10) return;
-				else HongScore += 0.2M;
+				if (HongScore == MAXIMUM_SCORE) return;
+				else HongScore += SCORE_INCREMENT;
 			}
 		}
 
 		public void ResetScores()
 		{
-			HongScore = 10.0M;
-			ChongScore = 10.0M;
+			HongScore = MAXIMUM_SCORE;
+			ChongScore = MAXIMUM_SCORE;
 			IsHongZero = false;
 			IsChongZero = false;
 		}
@@ -178,12 +182,12 @@
 
 		public decimal GetTotalHongScore()
 		{
-			return RoundScores[0].GetEffectiveHongScore() + RoundScores[1].GetEffectiveHongScore();
+			return RoundScores.Sum(x => x.GetEffectiveHongScore());
 		}
 
 		public decimal GetTotalChongScore()
 		{
-			return RoundScores[0].GetEffectiveChongScore() + RoundScores[1].GetEffectiveChongScore();
+			return RoundScores.Sum(x => x.GetEffectiveChongScore());
 		}
 	}
 
