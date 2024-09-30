@@ -13,10 +13,15 @@ Selects patterns at random, as if in a competition. It supports selecting a seri
 the selected rank. Alternatively, by enabling "World Championship" mode, two patterns are selected - one from the current rank, and one from all ranks. Multiple
 rounds of this can be selected as well - repeatetly select the "Pick Pattern" button.
 
-## Scoring Tool
+## Pattern Scoring Tool
 
 Can be used to score patterns of two competitors, using 0.2 deductions from a starting score of 10.0. This is designed to be used when scoring according to
 the *[2022 scoring rules](https://itftkd.sport/wp-content/uploads/2022/04/Official-ITF-Rules-of-Competition-Version-2022v1.pdf#page=68)* from itftkd.sport.
+
+## Sparring Scoring Tool
+
+Can be used to score sparring bouts simply - no special logic for rounds, disqualifications or golden points is implemented. This is more of a tool to assist
+when running a tournament without a live digital scoring system.
 
 ## Author
 

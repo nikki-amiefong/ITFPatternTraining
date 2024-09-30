@@ -15,6 +15,7 @@ builder.Services.AddRadzenComponents();
 
 builder.Services.AddSingleton<ScoreToolState>();
 builder.Services.AddSingleton<PatternSelectorState>();
+builder.Services.AddSingleton<SparringScoreToolState>();
 
 await builder.Build().RunAsync();
 
