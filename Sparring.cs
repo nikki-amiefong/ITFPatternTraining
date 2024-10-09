@@ -3,10 +3,10 @@ namespace ITFPatternTraining
 
     public class SparringRoundScore
     {
-        public decimal HongScore;
-        public int HongWarnings;
-        public decimal ChongScore;
-        public int ChongWarnings;
+        decimal HongScore;
+        int HongWarnings;
+        decimal ChongScore;
+        int ChongWarnings;
 
         public SparringRoundScore()
         {
@@ -26,13 +26,9 @@ namespace ITFPatternTraining
         public void AddWarning(bool IsChong)
         {
             if (IsChong)
-            {
                 ChongWarnings++;
-            }
             else
-            {
                 HongWarnings++;
-            }
         }
 
 
@@ -40,11 +36,31 @@ namespace ITFPatternTraining
         {
             if (IsChong)
             {
-                ChongWarnings--;
+                if (ChongWarnings > 0) ChongWarnings--;
             }
             else
             {
-                HongWarnings--;
+                if (HongWarnings > 0) HongWarnings--;
+            }
+        }
+
+        public void AddPoint(bool IsChong)
+        {
+            if (IsChong)
+                ChongScore++;
+            else
+                HongScore++;
+        }
+
+        public void UndoPoint(bool IsChong)
+        {
+            if (IsChong)
+            {
+                if (ChongScore > 0) ChongScore--;
+            }
+            else
+            {
+                if (HongScore > 0) HongScore--;
             }
         }
 
@@ -66,7 +82,7 @@ namespace ITFPatternTraining
     /// </summary>
     public class SparringScoreToolState
     {
-        public Stack<SparringRoundScore> Rounds = new Stack<SparringRoundScore>();
+        Stack<SparringRoundScore> Rounds = new Stack<SparringRoundScore>();
 
         public SparringScoreToolState()
         {
@@ -83,7 +99,27 @@ namespace ITFPatternTraining
             return Rounds.Peek().GetEffectiveChongScore();
         }
 
-        public void GetLastRound()
+        public void AddWarning(bool IsChong)
+        {
+            Rounds.Peek().AddWarning(IsChong);
+        }
+
+        public void UndoWarning(bool IsChong)
+        {
+            Rounds.Peek().UndoWarning(IsChong);
+        }
+
+        public void AddPoint(bool IsChong)
+        {
+            Rounds.Peek().AddPoint(IsChong);
+        }
+
+        public void UndoPoint(bool IsChong)
+        {
+            Rounds.Peek().UndoPoint(IsChong);
+        }
+
+        public void RestoreLastRound()
         {
             if (Rounds.Count > 1)
                 Rounds.Pop();
