@@ -1,19 +1,18 @@
 ﻿namespace ITFPatternTraining
 {
-    public class ITFPatterns
-    {
-        public static readonly string[] colourBeltPatterns = {
-            "Saju-Jirigi",
-            "Saji-Maki",
-            "Chon-Ji",
-            "Dan-Gun",
-            "Do-San",
-            "Won-Hyo",
-            "Joong-Gun",
-            "Toi-Gye",
-            "Hwa-rang",
-            "Choong-Moo"
-        };
+	public class ITFPatterns
+	{
+		public static readonly string[] colourBeltPatterns = {
+			"Chon-Ji",
+			"Dan-Gun",
+			"Do-San",
+			"Won-Hyo",
+			"Yul-Gok",
+			"Joong-Gun",
+			"Toi-Gye",
+			"Hwa-rang",
+			"Choong-Moo"
+		};
 
         public static readonly string[] Dan1Patterns = {
             "Kwang-Gae",
@@ -33,11 +32,12 @@
             "Choi-Yong"
         };
 
-        public static readonly string[] Dan4Patterns = {
-             "Yon-Gae",
-            "Ul-Ji",
-            "Moon-Moo"
-        };
+
+		public static readonly string[] Dan4Patterns = {
+			"Yon-Gae",
+			"Ul-Ji",
+			"Moon-Moo"
+		};
 
         public static readonly string[] Dan5Patterns = {
             "So-San",
@@ -79,19 +79,21 @@
             return possiblePatterns;
         }
 
-        public static List<string> GetRankPatterns(int rank)
-        {
-            var possiblePatterns = new List<string>();
-            if (rank == 1) possiblePatterns.AddRange(Dan1Patterns);
-            if (rank == 2) possiblePatterns.AddRange(Dan2Patterns);
-            if (rank == 3) possiblePatterns.AddRange(Dan3Patterns);
-            if (rank == 4) possiblePatterns.AddRange(Dan4Patterns);
-            if (rank == 5) possiblePatterns.AddRange(Dan5Patterns);
-            if (rank == 6) possiblePatterns.AddRange(Dan6Patterns);
 
-            return possiblePatterns;
-        }
-    }
+		public static List<string> GetRankPatterns(int rank)
+		{
+			switch (rank)
+			{
+				case 1: return Dan1Patterns.ToList<string>();
+				case 2: return Dan2Patterns.ToList<string>();
+				case 3: return Dan3Patterns.ToList<string>();
+				case 4: return Dan4Patterns.ToList<string>();
+				case 5: return Dan5Patterns.ToList<string>();
+				case 6: return Dan6Patterns.ToList<string>();
+				default: throw new ArgumentOutOfRangeException(paramName: "rank", message: "The rank parameter should be between 1 and 6 inclusive.");
+			}
+		}
+	}
 
     public struct SelectedPattern
     {
@@ -100,12 +102,16 @@
     }
 
 
-    public class RoundScore
-    {
-        public decimal HongScore;
-        public bool IsHongZero;
-        public decimal ChongScore;
-        public bool IsChongZero;
+
+	public class RoundScore
+	{
+		public const decimal MAXIMUM_SCORE = 10.0M;
+		public const decimal SCORE_INCREMENT = 0.2M;
+
+		public decimal HongScore;
+		public bool IsHongZero;
+		public decimal ChongScore;
+		public bool IsChongZero;
 
         public RoundScore()
         {
@@ -124,43 +130,44 @@
             else return ChongScore;
         }
 
-        public void Deduct(bool IsChong)
-        {
-            if (IsChong)
-            {
-                if (ChongScore == 0) return;
-                else ChongScore -= 0.2M;
-            }
-            else
-            {
-                if (HongScore == 0) return;
-                else HongScore -= 0.2M;
-            }
-        }
+
+		public void Deduct(bool IsChong)
+		{
+			if (IsChong)
+			{
+				if (ChongScore == 0) return;
+				else ChongScore -= SCORE_INCREMENT;
+			}
+			else
+			{
+				if (HongScore == 0) return;
+				else HongScore -= SCORE_INCREMENT;
+			}
+		}
 
 
-        public void UndoDeduct(bool IsChong)
-        {
-            if (IsChong)
-            {
-                if (ChongScore == 10) return;
-                else ChongScore += 0.2M;
-            }
-            else
-            {
-                if (HongScore == 10) return;
-                else HongScore += 0.2M;
-            }
-        }
+		public void UndoDeduct(bool IsChong)
+		{
+			if (IsChong)
+			{
+				if (ChongScore == MAXIMUM_SCORE) return;
+				else ChongScore += SCORE_INCREMENT;
+			}
+			else
+			{
+				if (HongScore == MAXIMUM_SCORE) return;
+				else HongScore += SCORE_INCREMENT;
+			}
+		}
 
-        public void ResetScores()
-        {
-            HongScore = 10.0M;
-            ChongScore = 10.0M;
-            IsHongZero = false;
-            IsChongZero = false;
-        }
-    }
+		public void ResetScores()
+		{
+			HongScore = MAXIMUM_SCORE;
+			ChongScore = MAXIMUM_SCORE;
+			IsHongZero = false;
+			IsChongZero = false;
+		}
+	}
 
     /// <summary>
     /// Stores the state of the scoring tool
@@ -177,22 +184,22 @@
             RoundScores[1] = new RoundScore();
         }
 
-        public decimal GetTotalHongScore()
-        {
-            return RoundScores[0].GetEffectiveHongScore() + RoundScores[1].GetEffectiveHongScore();
-        }
 
-        public decimal GetTotalChongScore()
-        {
-            return RoundScores[0].GetEffectiveChongScore() + RoundScores[1].GetEffectiveChongScore();
-        }
-    }
+		public decimal GetTotalHongScore()
+		{
+			return RoundScores.Sum(x => x.GetEffectiveHongScore());
+		}
 
-    public class PatternSelectorState
-    {
-        public string Rank = "1st Dan";
-        public bool Saju = false;
-        public bool AddTwoPatterns = false;
+		public decimal GetTotalChongScore()
+		{
+			return RoundScores.Sum(x => x.GetEffectiveChongScore());
+		}
+	}
+
+	public class PatternSelectorState
+	{
+		public string Rank = "1st Dan";
+		public bool AddTwoPatterns = false;
 
         public List<SelectedPattern> SelectedPatterns = new List<SelectedPattern>();
     }

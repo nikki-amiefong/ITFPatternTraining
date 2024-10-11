@@ -23,6 +23,8 @@ the *[2022 scoring rules](https://itftkd.sport/wp-content/uploads/2022/04/Offici
 Can be used to score sparring bouts simply - no special logic for rounds, disqualifications or golden points is implemented. This is more of a tool to assist
 when running a tournament without a live digital scoring system.
 
+This is designed to be used on a mobile device, in landscape orientation - the layout isn't helpful in portrait.
+
 ## Author
 
 Nikki Amie-Fong  

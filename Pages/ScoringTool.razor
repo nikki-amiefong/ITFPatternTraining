@@ -1,24 +1,59 @@
 @page "/ScoringTool"
 @inject ScoreToolState scoreToolState
+@inject IJSRuntime JS
 
 
 <PageTitle>Pattern Scoring Tool</PageTitle>
 
-<RadzenRow>
+<script>
+	function vibrateOnButtonPress() {
+		if (!window) {
+			return;
+		}
+
+		if (!window.navigator) {
+			return;
+		}
+
+		if (!window.navigator.vibrate) {
+			return;
+		}
+
+		window.navigator.vibrate(100);
+	}
+
+	function vibrateOnResetPress() {
+		if (!window) {
+			return;
+		}
+
+		if (!window.navigator) {
+			return;
+		}
+
+		if (!window.navigator.vibrate) {
+			return;
+		}
+
+		window.navigator.vibrate(150, 50, 150);
+	}
+</script>
+
+<RadzenRow Gap="0.2rem">
 	<RadzenColumn>
-		<RadzenStack Style="height: 100%">
+		<RadzenStack Style="height: 100%" Gap="1.0rem">
 			<RadzenButton Text="-0.2" Style="background-color: #9a0000; height: 80%; font-size: 30px" Click=@(args => OnDeductClick(false)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-				<RadzenRow AlignItems="AlignItems.Start">
-					<RadzenCheckBox Name="HongZeroCheckbox" @oninput="OnHongZeroClick" @bind-Value=@hongZero Style="vertical-align: middle;" />
+				<RadzenRow AlignItems="AlignItems.Center" Style="vertical-align: middle;">
+					<RadzenSwitch Name="HongZeroCheckbox" TValue="bool" @bind-Value=@hongZero Change=@OnHongZeroClick Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="HongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
-				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(false)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" ButtonStyle="ButtonStyle.Success" Click=@(args => OnUndoDeductClick(false)) class="disable-dbl-tap-zoom" />
 			</RadzenStack>
 		</RadzenStack>
 	</RadzenColumn>
 	<RadzenColumn Style="text-align: center">
-		<RadzenRow JustifyContent="Radzen.JustifyContent.Center">
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Gap="0.6rem">
 			<RadzenSelectBar TValue="int" Size="ButtonSize.Small" @bind-Value="@selectedRound" Change="@(args => UpdateZeroCheckboxs())">
 				<Items>
 					<RadzenSelectBarItem Value="1" Text="Round 1" />
@@ -26,27 +61,29 @@
 				</Items>
 			</RadzenSelectBar>
 		</RadzenRow>
-		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px"><RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" Click="@(args => OnResetClick())" /></RadzenRow>
 		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
-			<table style="text-align: left; margin: 3px">
+			<RadzenButton Text="Reset" Shade="Radzen.Shade.Default" ButtonStyle="Radzen.ButtonStyle.Warning" Click="@(args => OnResetClick())" />
+		</RadzenRow>
+		<RadzenRow JustifyContent="Radzen.JustifyContent.Center" Style="margin: 10px">
+			<table style="text-align: left; margin: 3px; vertical-align: central">
 				<tr style="border-bottom: 1px solid #808080">
 					<th></th>
-					<th style="padding: 5px; text-align: center">Hong</th>
-					<th style="padding: 5px; text-align: center">Chong</th>
+					<th style="padding: 5px; text-align: center"><RadzenText TextStyle="TextStyle.Overline">Hong</RadzenText></th>
+					<th style="padding: 5px; text-align: center"><RadzenText TextStyle="TextStyle.Overline">Chong</RadzenText></th>
 				</tr>
 				<tr>
-					<td>Rnd 1</td>
+					<td><RadzenText TextStyle="TextStyle.Overline">R1</RadzenText></td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[0].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 				<tr>
-					<td>Rnd 2</td>
+					<td><RadzenText TextStyle="TextStyle.Overline">R2</RadzenText></td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveHongScore().ToString("0.0"))</td>
 					<td style="text-align: center">@(scoreToolState.RoundScores[1].GetEffectiveChongScore().ToString("0.0"))</td>
 				</tr>
 
 				<tr style="border-top: 1px solid #808080; border-bottom: 1px solid #808080">
-					<td style="font-style: italic;">Total</td>
+					<td style="font-style: italic;"></td>
 					<td style="text-align: center; font-style: italic">@(scoreToolState.GetTotalHongScore().ToString("0.0"))</td>
 					<td style="text-align: center; font-style: italic">@(scoreToolState.GetTotalChongScore().ToString("0.0"))</td>
 				</tr>
@@ -55,18 +92,23 @@
 	</RadzenRow>
 	</RadzenColumn>
 	<RadzenColumn>
-		<RadzenStack Style="height: 100%">
+		<RadzenStack Style="height: 100%" Gap="1.0rem">
 			<RadzenButton Text="-0.2" Style="background-color: #0006c8; height: 80%; font-size: 30px" Click=@(args => OnDeductClick(true)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-				<RadzenRow AlignItems="AlignItems.Start">
-					<RadzenCheckBox @oninput="OnChongZeroClick" Name="ChongZeroCheckbox"  @bind-Value=@chongZero Style="vertical-align: middle;" />
+				<RadzenRow AlignItems="AlignItems.Center" Style="vertical-align: middle;">
+					<RadzenSwitch TValue="bool" @bind-Value=@chongZero Change=@OnChongZeroClick Name="ChongZeroCheckbox" Style="vertical-align: middle;" />
 					<RadzenLabel Text="Zero" Component="ChongZeroCheckbox" Style="vertical-align: middle;" />
 				</RadzenRow>
-				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoDeductClick(true)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="+0.2" Style="float: right; position: relative; right: 0px" ButtonStyle="ButtonStyle.Success" Click=@(args => OnUndoDeductClick(true)) class="disable-dbl-tap-zoom" />
 			</RadzenStack>
 		</RadzenStack>
 	</RadzenColumn>
 </RadzenRow>
+<p />
+<p />
+<div class="rotate-device-warning">
+	<p><b>Mobile users:</b> For the best experience, please hold your device in the landscape orientation.</p>
+</div>
 
 
 @code {
@@ -75,29 +117,31 @@
 	private bool chongZero = false;
 	private int selectedRound = 1;
 
-	private void OnDeductClick(bool IsChong)
+	private async Task OnDeductClick(bool IsChong)
 	{
 		scoreToolState.RoundScores[selectedRound - 1].Deduct(IsChong);
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnUndoDeductClick(bool IsChong)
+	private async Task OnUndoDeductClick(bool IsChong)
 	{
 		scoreToolState.RoundScores[selectedRound - 1].UndoDeduct(IsChong);
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnHongZeroClick(ChangeEventArgs e)
+	private async Task OnHongZeroClick()
 	{
-		if (e.Value is not null)
-			scoreToolState.RoundScores[selectedRound - 1].IsHongZero = (bool)e.Value;
+		scoreToolState.RoundScores[selectedRound - 1].IsHongZero = hongZero;
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnChongZeroClick(ChangeEventArgs e)
+	private async Task OnChongZeroClick()
 	{
-		if (e.Value is not null)
-			scoreToolState.RoundScores[selectedRound - 1].IsChongZero = (bool)e.Value;
+		scoreToolState.RoundScores[selectedRound - 1].IsChongZero = chongZero;
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnResetClick()
+	private async Task OnResetClick()
 	{
 		// reset both rounds - could just reset the selected round though if desired
 		//scoreToolState.RoundScores[selectedRound - 1].ResetScores();
@@ -105,6 +149,8 @@
 		scoreToolState.RoundScores[1].ResetScores();
 
 		UpdateZeroCheckboxs();
+
+		await JS.InvokeVoidAsync("vibrateOnResetPress");
 	}
 
 	private void UpdateZeroCheckboxs()
@@ -115,7 +161,7 @@
 
 	protected override async Task OnInitializedAsync()
 	{
-		UpdateZeroCheckboxs();
+		await Task.Run(UpdateZeroCheckboxs);
 	}
 
 }

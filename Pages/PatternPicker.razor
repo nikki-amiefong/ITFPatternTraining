@@ -1,19 +1,15 @@
+﻿@page "/PatternPicker"
 @page "/"
 @inject PatternSelectorState patternSelectorState
 
 
-<PageTitle>Random Pattern Selector</PageTitle>
+<PageTitle>Pattern Picker</PageTitle>
 
 <RadzenStack Orientation="Orientation.Vertical">
-		<RadzenText Text="Randomly picks ITF patterns for training. Supports selecting multiple rounds" TextStyle="Radzen.Blazor.TextStyle.Subtitle2" TagName="Radzen.Blazor.TagName.Auto" class="mt-4" Style="font-size: 20px; line-height: 24px"></RadzenText>
-		<RadzenRow AlignItems="AlignItems.Center">
-			<RadzenLabel Text="Competitor rank: " Component="DropDownBindValue" Style="margin-right: 8px; vertical-align: middle" />
+		<RadzenText Text="Randomly picks ITF patterns for training. Supports selecting multiple rounds." TextStyle="Radzen.Blazor.TextStyle.Body1" TagName="Radzen.Blazor.TagName.Auto"></RadzenText>
+		<RadzenRow AlignItems="AlignItems.Normal">
 			<RadzenSelectBar @bind-Value="@(patternSelectorState.Rank)" Name="RankSelection" TextProperty="Text" ValueProperty="Value" Data="@ITFPatterns.ranks" Size="ButtonSize.Small" Class="rz-display-none rz-display-xl-flex" />
 			<RadzenDropDown @bind-Value="@(patternSelectorState.Rank)" Name="RankSelection" Data="@ITFPatterns.ranks" Class="rz-display-flex rz-display-xl-none" />
-		</RadzenRow>
-		<RadzenRow>
-			<RadzenCheckBox @bind-Value="patternSelectorState.Saju" Name="SajuCheckbox" />
-			<RadzenLabel Text="Include Saju-Jirigi & Saju-Maki" Component="SajuCheckbox" Style="margin-right: 8px; vertical-align: middle;" />
 		</RadzenRow>
 		<RadzenRow>
 		<RadzenCheckBox @bind-Value="patternSelectorState.AddTwoPatterns" Name="AddTwoPatternsCheckbox" @bind-Value:after="Reset" />
@@ -51,14 +47,10 @@
 
 	private void SelectPattern()
 	{
-		int arrayStart = patternSelectorState.Saju ? 0 : 2;
-		int i = 0;
-		const int MAX_ITERATIONS = 100;
-
 		int selectedRank = Array.IndexOf(ITFPatterns.ranks, patternSelectorState.Rank) + 1;
 
-		var rankPatterns = ITFPatterns.GetRankPatterns(selectedRank);
-		var possiblePatterns = ITFPatterns.GetPatternsList(selectedRank);
+		List<string> rankPatterns = ITFPatterns.GetRankPatterns(selectedRank);
+		List<string> possiblePatterns = ITFPatterns.GetPatternsList(selectedRank);
 
 
 
@@ -75,42 +67,33 @@
 
 			patternSelectorState.SelectedPatterns.Add(newPattern1);
 
+			// now, remove that pattern from the list of possible ones
+			possiblePatterns.Remove(newPattern1.Pattern);
+
 			newPattern2.Label = "";
-			newPattern2.Pattern = possiblePatterns[rnd.Next(arrayStart, possiblePatterns.Count)];
+			newPattern2.Pattern = possiblePatterns[rnd.Next(0, possiblePatterns.Count)];
 
 			patternSelectorState.SelectedPatterns.Add(newPattern2);
-
-			return;
 		}
 		else
 		{
+			// remove the patterns we have already selected from the list of possible ones
+			var p = possiblePatterns.Except<string>(patternSelectorState.SelectedPatterns.Select<SelectedPattern, string>((p, s) => p.Pattern)).ToList();
+
 			// do nothing if we have already selected all patterns
-			if (patternSelectorState.SelectedPatterns.Count >= possiblePatterns.Count - arrayStart)
+			if (p.Count() == 0)
 				return;
 
 			string newPatternName = "";
 
 			// select a new pattern - but don't select one that we have already selected
-			while (i < MAX_ITERATIONS)
-			{
-				newPatternName = possiblePatterns[rnd.Next(arrayStart, possiblePatterns.Count)];
-				if (!patternSelectorState.SelectedPatterns.Exists(x => x.Pattern == newPatternName))
+			newPatternName = p[rnd.Next(0, p.Count())];
+			patternSelectorState.SelectedPatterns.Add(new SelectedPattern()
 				{
-					var newPattern = new SelectedPattern()
-						{
-							Label = (patternSelectorState.SelectedPatterns.Count + 1).ToString(),
-							Pattern = newPatternName
-						};
-
-					patternSelectorState.SelectedPatterns.Add(newPattern);
-					return;
+					Label = (patternSelectorState.SelectedPatterns.Count + 1).ToString(),
+					Pattern = newPatternName
 				}
-
-				i++;
-			}
-
-			throw new Exception("Logic exception - could not select a new pattern");
-
+			);
 		}
 	}
 
