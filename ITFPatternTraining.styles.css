@@ -92,3 +92,19 @@ main[b-c9nve5igob] {
 		border: 2px solid red;
 	}
 }
+/* /Pages/SparringScoringTool.razor.rz.scp.css */
+@media screen and (orientation: landscape) {
+	.rotate-device-warning[b-lbjqhigccr] {
+		display: none;
+	}
+}
+
+@media screen and (orientation: portrait) {
+	.rotate-device-warning[b-lbjqhigccr] {
+		display: block;
+		width: 100%;
+		background-color: lightyellow;
+		padding: 10px;
+		border: 2px solid red;
+	}
+}
