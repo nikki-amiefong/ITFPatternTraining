@@ -3,10 +3,10 @@ namespace ITFPatternTraining
 
     public class SparringRoundScore
     {
-        decimal HongScore;
-        int HongWarnings;
-        decimal ChongScore;
-        int ChongWarnings;
+        public decimal HongScore;
+        public int HongWarnings;
+        public decimal ChongScore;
+        public int ChongWarnings;
 
         public SparringRoundScore()
         {
@@ -89,14 +89,34 @@ namespace ITFPatternTraining
             Rounds.Push(new SparringRoundScore());
         }
 
-        public decimal GetHongScore()
+        public decimal GetEffectiveHongScore()
         {
             return Rounds.Peek().GetEffectiveHongScore();
         }
 
-        public decimal GetChongScore()
+        public decimal GetEffectiveChongScore()
         {
             return Rounds.Peek().GetEffectiveChongScore();
+        }
+
+        public int GetHongWarnings()
+        {
+            return Rounds.Peek().HongWarnings;
+        }
+
+        public int GetChongWarnings()
+        {
+            return Rounds.Peek().ChongWarnings;
+        }
+
+        public decimal GetHongScore()
+        {
+            return Rounds.Peek().HongScore;
+        }
+
+        public decimal GetChongScore()
+        {
+            return Rounds.Peek().ChongScore;
         }
 
         public void AddWarning(bool IsChong)

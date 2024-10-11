@@ -10,9 +10,9 @@
 			<RadzenButton Text="+1" Style="background-color: #9a0000; height: 80%; font-size: 30px" Click=@(args => OnAddPointClick(false)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
 				
-				<RadzenButton Text="+Warn" Style="float: right; position: relative; right: 0px" Click=@(args => OnAddWarningClick(false)) class="disable-dbl-tap-zoom" />
-				<RadzenButton Text="-Warn" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoWarningClick(false)) class="disable-dbl-tap-zoom" />
-				<RadzenButton Text="-1" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoPointClick(false)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="+Warn" Style="float: left; position: relative" Click=@(args => OnAddWarningClick(false)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="-Warn" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoWarningClick(false)) class="disable-dbl-tap-zoom" ButtonStyle="Radzen.ButtonStyle.Warning" />
+				<RadzenButton Text="-1" Style="float: right; position: relative; right: 0px; width: 90px" Click=@(args => OnUndoPointClick(false)) class="disable-dbl-tap-zoom" ButtonStyle="Radzen.ButtonStyle.Dark" />
 			</RadzenStack>
 		</RadzenStack>
 	</RadzenColumn>
@@ -36,14 +36,14 @@
 				</tr>
 				<tr>
 					<td>Warn</td>
-					<td style="text-align: center">@(sparringScoreToolState.GetHongScore().ToString("0"))</td>
-					<td style="text-align: center">@(sparringScoreToolState.GetChongScore().ToString("0"))</td>
+					<td style="text-align: center">@(sparringScoreToolState.GetHongWarnings())</td>
+					<td style="text-align: center">@(sparringScoreToolState.GetChongWarnings())</td>
 				</tr>
 
 				<tr style="border-top: 1px solid #808080; border-bottom: 1px solid #808080">
 					<td style="font-style: italic;">Score</td>
-					<td style="text-align: center; font-style: italic">@(sparringScoreToolState.GetHongScore().ToString("0"))</td>
-					<td style="text-align: center; font-style: italic">@(sparringScoreToolState.GetChongScore().ToString("0"))</td>
+					<td style="text-align: center; font-style: italic">@(sparringScoreToolState.GetEffectiveHongScore().ToString("0"))</td>
+					<td style="text-align: center; font-style: italic">@(sparringScoreToolState.GetEffectiveChongScore().ToString("0"))</td>
 				</tr>
 			</table>
 		
@@ -53,7 +53,10 @@
 		<RadzenStack Style="height: 100%">
 			<RadzenButton Text="+1" Style="background-color: #0006c8; height: 80%; font-size: 30px" Click=@(args => OnAddPointClick(true)) class="disable-dbl-tap-zoom" />
 			<RadzenStack Orientation="Orientation.Horizontal" AlignItems="Radzen.AlignItems.Center">
-				<RadzenButton Text="+Warn" Style="float: right; position: relative; right: 0px" Click=@(args => OnAddWarningClick(true)) class="disable-dbl-tap-zoom" />
+				
+				<RadzenButton Text="+Warn" Style="float: left; position: relative" Click=@(args => OnAddWarningClick(true)) class="disable-dbl-tap-zoom" />
+				<RadzenButton Text="-Warn" Style="float: right; position: relative; right: 0px" Click=@(args => OnUndoWarningClick(true)) class="disable-dbl-tap-zoom" ButtonStyle="Radzen.ButtonStyle.Warning" />
+				<RadzenButton Text="-1" Style="float: right; position: relative; right: 0px; width: 90px" Click=@(args => OnUndoPointClick(true)) class="disable-dbl-tap-zoom" ButtonStyle="Radzen.ButtonStyle.Dark" />
 			</RadzenStack>
 		</RadzenStack>
 	</RadzenColumn>
@@ -71,6 +74,11 @@
 		sparringScoreToolState.AddPoint(IsChong);
 	}
 
+	private void OnUndoPointClick(bool IsChong)
+	{
+		sparringScoreToolState.UndoPoint(IsChong);
+	}
+
 	private void OnAddWarningClick(bool IsChong)
 	{
 		sparringScoreToolState.AddWarning(IsChong);
@@ -80,12 +88,6 @@
 	private void OnUndoWarningClick(bool IsChong)
 	{
 		sparringScoreToolState.UndoWarning(IsChong);
-	}
-
-
-	private void OnUndoPointClick(bool IsChong)
-	{
-		sparringScoreToolState.UndoPoint(IsChong);
 	}
 
 	
