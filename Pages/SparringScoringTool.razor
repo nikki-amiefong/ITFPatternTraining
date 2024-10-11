@@ -65,10 +65,6 @@
 
 @code {
 
-	private bool hongZero = false;
-	private bool chongZero = false;
-	private int selectedRound = 1;
-
 	private void OnAddPointClick(bool IsChong)
 	{
 		sparringScoreToolState.AddPoint(IsChong);
@@ -100,12 +96,6 @@
 	private void OnUndoResetClick()
 	{
 		sparringScoreToolState.RestoreLastRound();
-	}
-
-
-	protected override async Task OnInitializedAsync()
-	{
-		//UpdateZeroCheckboxs();
 	}
 
 }
