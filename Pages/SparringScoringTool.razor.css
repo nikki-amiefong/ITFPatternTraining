@@ -1,0 +1,15 @@
+﻿@media screen and (orientation: landscape) {
+	.rotate-device-warning {
+		display: none;
+	}
+}
+
+@media screen and (orientation: portrait) {
+	.rotate-device-warning {
+		display: block;
+		width: 100%;
+		background-color: lightyellow;
+		padding: 10px;
+		border: 2px solid red;
+	}
+}
