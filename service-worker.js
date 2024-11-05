@@ -53,4 +53,4 @@ async function onFetch(event) {
 
     return cachedResponse || fetch(event.request);
 }
-/* Manifest version: IqM1ZAam */
+/* Manifest version: k1JRbhee */
