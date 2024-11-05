@@ -1,6 +1,6 @@
 @page "/SparringScoringTool"
 @inject SparringScoreToolState sparringScoreToolState
-
+@inject IJSRuntime JS
 
 <PageTitle>Pattern Scoring Tool</PageTitle>
 
@@ -104,37 +104,49 @@
 
 @code {
 
-	private void OnAddPointClick(bool IsChong)
+	private async Task OnAddPointClick(bool IsChong)
 	{
 		sparringScoreToolState.AddPoint(IsChong);
+
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnUndoPointClick(bool IsChong)
+	private async Task OnUndoPointClick(bool IsChong)
 	{
 		sparringScoreToolState.UndoPoint(IsChong);
+
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
-	private void OnAddWarningClick(bool IsChong)
+	private async Task OnAddWarningClick(bool IsChong)
 	{
 		sparringScoreToolState.AddWarning(IsChong);
+
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
 
-	private void OnUndoWarningClick(bool IsChong)
+	private async Task OnUndoWarningClick(bool IsChong)
 	{
 		sparringScoreToolState.UndoWarning(IsChong);
+
+		await JS.InvokeVoidAsync("vibrateOnButtonPress");
 	}
 
 	
 
-	private void OnResetClick()
+	private async Task OnResetClick()
 	{
 		sparringScoreToolState.NewRound();
+
+		await JS.InvokeVoidAsync("vibrateOnResetPress");
 	}
 
-	private void OnUndoResetClick()
+	private async Task OnUndoResetClick()
 	{
 		sparringScoreToolState.RestoreLastRound();
+
+		await JS.InvokeVoidAsync("vibrateOnResetPress");
 	}
 
 }
