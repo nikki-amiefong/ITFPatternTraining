@@ -148,8 +148,10 @@
 		scoreToolState.RoundScores[0].ResetScores();
 		scoreToolState.RoundScores[1].ResetScores();
 
-		UpdateZeroCheckboxs();
+		selectedRound = 1;          // set round selector back to first round - https://github.com/nikki-amiefong/ITFPatternTraining/issues/4
 
+		UpdateZeroCheckboxs();
+		
 		await JS.InvokeVoidAsync("vibrateOnResetPress");
 	}
 

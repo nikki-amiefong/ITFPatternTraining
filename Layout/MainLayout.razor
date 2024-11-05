@@ -8,33 +8,33 @@
 <RadzenComponents />
 
 <RadzenLayout>
-    <RadzenHeader>
-        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
-            <RadzenSidebarToggle Click="@(() => sidebar1Expanded = !sidebar1Expanded)" />
-            <RadzenLabel Text="ITF Competition Tools" />
-        </RadzenStack>
-    </RadzenHeader>
-    <RadzenSidebar Responsive="false" @bind-Expanded="@sidebar1Expanded">
-        <RadzenPanelMenu>
-            <RadzenPanelMenuItem Text="Pattern Picker" Icon="accessibility" Path="PatternPicker" Click=@(args => sidebar1Expanded = false) />
-            <RadzenPanelMenuItem Text="Pattern Scoring Tool" Icon="alarm_add" Path="ScoringTool" Click=@(args => sidebar1Expanded = false) />
-            <RadzenPanelMenuItem Text="Sparring Scoring Tool" Icon="alarm_add" Path="SparringScoringTool" Click=@(args => sidebar1Expanded = false) />
-        </RadzenPanelMenu>
-        <div class="rz-p-4">
-            <a href="https://github.com/nikki-amiefong/ITFPatternTraining/blob/main/README.md" target="_blank">About</a>
-             <RadzenAppearanceToggle class="rz-mx-2" />
-        </div>
-    </RadzenSidebar>
-    <RadzenBody>
-        <div class="rz-p-4">
-            @Body
-        </div>
-    </RadzenBody>
+	<RadzenHeader>
+		<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+			<RadzenSidebarToggle Click="@(() => sidebar1Expanded = !sidebar1Expanded)" />
+			<RadzenLabel Text="ITF Competition Tools" />
+		</RadzenStack>
+	</RadzenHeader>
+	<RadzenSidebar Responsive="false" @bind-Expanded="@sidebar1Expanded">
+		<RadzenPanelMenu>
+			<RadzenPanelMenuItem Text="Pattern Picker" Icon="accessibility" Path="PatternPicker" Click=@(args => sidebar1Expanded = false) />
+			<RadzenPanelMenuItem Text="Pattern Scoring Tool" Icon="alarm_add" Path="ScoringTool" Click=@(args => sidebar1Expanded = false) />
+			<RadzenPanelMenuItem Text="Sparring Scoring Tool" Icon="alarm_add" Path="SparringScoringTool" Click=@(args => sidebar1Expanded = false) />
+		</RadzenPanelMenu>
+		<div class="rz-p-4">
+			<a href="https://github.com/nikki-amiefong/ITFPatternTraining/blob/main/README.md" target="_blank">About</a>
+			 <RadzenAppearanceToggle class="rz-mx-2" />
+		</div>
+	</RadzenSidebar>
+	<RadzenBody>
+		<div class="rz-p-4">
+			@Body
+		</div>
+	</RadzenBody>
 @*     <RadzenFooter>
-        Footer
-    </RadzenFooter> *@
+		Footer
+	</RadzenFooter> *@
 </RadzenLayout>
 
 @code {
-    bool sidebar1Expanded = false;
+	bool sidebar1Expanded = false;
 }
