@@ -1,9 +1,9 @@
 {
   "mainAssemblyName": "ITFPatternTraining",
   "resources": {
-    "hash": "sha256-wg2SbrNxC7g5Mt3uN1E2UX2xiWwcw0EjpbmulPFLN8Y=",
+    "hash": "sha256-xMZAa12lf331j1LxeYobJQWxebn/0pTiz8p4pEVqfAU=",
     "fingerprinting": {
-      "ITFPatternTraining.08tjwz0xrt.wasm": "ITFPatternTraining.wasm",
+      "ITFPatternTraining.ctw88en1dl.wasm": "ITFPatternTraining.wasm",
       "Microsoft.AspNetCore.Components.Forms.sqwpiwgmh5.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
       "Microsoft.AspNetCore.Components.ws25cwid69.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Web.qrhujj3836.wasm": "Microsoft.AspNetCore.Components.Web.wasm",
@@ -133,7 +133,7 @@
       "System.Runtime.InteropServices.JavaScript.0tgicm7vjk.wasm": "sha256-bAbPaONHne7R1hItHoY8/SYWlDb84JZQ1cxd1Y+tJn0="
     },
     "assembly": {
-      "ITFPatternTraining.08tjwz0xrt.wasm": "sha256-sOYbXh4DHbBF8W0a4N4Gnk9XZ8QT9Vv5UX5z1dMKLGA=",
+      "ITFPatternTraining.ctw88en1dl.wasm": "sha256-IAgSKfHB97tfa8mBmXQwxfZ04NJc+F9yowypDqhAEMg=",
       "Microsoft.AspNetCore.Components.Forms.sqwpiwgmh5.wasm": "sha256-BMRz/Ks4E5YBIWRatSSIDeMrQYiysanVpwuD/OYtC9w=",
       "Microsoft.AspNetCore.Components.ws25cwid69.wasm": "sha256-cAlu8Qolpedu/50yvBNMNwseXhfxzXisC3deGh9avmg=",
       "Microsoft.AspNetCore.Components.Web.qrhujj3836.wasm": "sha256-dgQRRupGc3pcLtH39Q8wBfQrXiBuRUbzd4VeYq4zaC4=",
