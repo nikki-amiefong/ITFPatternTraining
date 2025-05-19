@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "ITFPatternTraining",
   "resources": {
-    "hash": "sha256-V66KEnAHqR8OVHrlnHOwowsUMhVYaqaAGvVIEbDypOM=",
+    "hash": "sha256-jiZUf7kQmsqpeK2igkRi1JRFnL3NIA1o1batYkLD99Y=",
     "fingerprinting": {
       "Microsoft.AspNetCore.Components.b140oneftf.wasm": "Microsoft.AspNetCore.Components.wasm",
       "Microsoft.AspNetCore.Components.Forms.ebvvy3tgak.wasm": "Microsoft.AspNetCore.Components.Forms.wasm",
@@ -60,7 +60,7 @@
       "System.Xml.XDocument.rwln4b79v2.wasm": "System.Xml.XDocument.wasm",
       "System.ezrw3d5kw2.wasm": "System.wasm",
       "System.Private.CoreLib.ud75d1lk8o.wasm": "System.Private.CoreLib.wasm",
-      "ITFPatternTraining.xvld4di7yo.wasm": "ITFPatternTraining.wasm",
+      "ITFPatternTraining.5euvzwv4az.wasm": "ITFPatternTraining.wasm",
       "dotnet.native.nhptostu1x.js": "dotnet.native.js",
       "dotnet.native.pay9rw1j8x.wasm": "dotnet.native.wasm",
       "dotnet.js": "dotnet.js",
@@ -143,7 +143,7 @@
       "System.Xml.Linq.9s8atxe8u2.wasm": "sha256-B3Sn5WuDQKyX1cBKZwM/t4NNOIT2E8PtPWVPp/EINqE=",
       "System.Xml.XDocument.rwln4b79v2.wasm": "sha256-VfFCgADjK8j9zC8VKvIKPX4/bVw3cC9TXWeascFCr6k=",
       "System.ezrw3d5kw2.wasm": "sha256-ViNRvhyxlTugIlqJHamw/HwbXlg/YWcrANmxuTM0tfg=",
-      "ITFPatternTraining.xvld4di7yo.wasm": "sha256-85ewctzStULyTcFDr1GyI1xqBgOdN17g+qQExm2CBLo="
+      "ITFPatternTraining.5euvzwv4az.wasm": "sha256-nR6+StYEGyBL6GHaRmGyfCoapSSfrmXEsrqJXbfznDs="
     }
   },
   "cacheBootResources": true,
