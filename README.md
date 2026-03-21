@@ -28,4 +28,4 @@ This is designed to be used on a mobile device, in landscape orientation - the l
 ## Author
 
 Nikki Amie-Fong  
-<nikki.amiefong@gmail.com>
+<nikki.amiefong@outlook.com>
