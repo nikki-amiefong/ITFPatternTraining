@@ -2,7 +2,7 @@
 @inject SparringScoreToolState sparringScoreToolState
 @inject IJSRuntime JS
 
-<PageTitle>Pattern Scoring Tool</PageTitle>
+<PageTitle>Sparring Scoring Tool</PageTitle>
 
 <script>
 	function vibrateOnButtonPress() {
@@ -34,7 +34,7 @@
 			return;
 		}
 
-		window.navigator.vibrate(150, 50, 150);
+		window.navigator.vibrate([150, 50, 150]);
 	}
 </script>
 
