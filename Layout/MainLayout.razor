@@ -4,6 +4,8 @@
 @inherits LayoutComponentBase
 @inject ThemeService ThemeService
 @inject QueryStringThemeService QueryStringThemeService
+@inject IJSRuntime JS
+@implements IDisposable
 
 <RadzenComponents />
 <RadzenTheme Theme="material" />
@@ -23,6 +25,10 @@
 		</RadzenPanelMenu>
 		<div class="rz-p-4">
 			<a href="https://github.com/nikki-amiefong/ITFPatternTraining/blob/main/README.md" target="_blank">About</a>
+			@if (showInstallButton)
+			{
+				<a href="#" @onclick="InstallApp" @onclick:preventDefault class="rz-mx-2">Install App</a>
+			}
 			 <RadzenAppearanceToggle class="rz-mx-2" />
 		</div>
 	</RadzenSidebar>
@@ -38,4 +44,33 @@
 
 @code {
 	bool sidebar1Expanded = false;
+	bool showInstallButton = false;
+	DotNetObjectReference<MainLayout>? dotNetRef;
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		if (firstRender)
+		{
+			dotNetRef = DotNetObjectReference.Create(this);
+			await JS.InvokeVoidAsync("registerInstallHelper", dotNetRef);
+		}
+	}
+
+	[JSInvokable]
+	public void OnInstallAvailable()
+	{
+		showInstallButton = true;
+		StateHasChanged();
+	}
+
+	private async Task InstallApp()
+	{
+		await JS.InvokeVoidAsync("promptInstall");
+		showInstallButton = false;
+	}
+
+	public void Dispose()
+	{
+		dotNetRef?.Dispose();
+	}
 }

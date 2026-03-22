@@ -33,6 +33,33 @@
 		<a href="" class="reload">Reload</a>
 		<a class="dismiss">🗙</a>
 	</div>
+	<script>
+		let deferredInstallPrompt = null;
+		let dotNetInstallHelper = null;
+
+		window.addEventListener('beforeinstallprompt', (e) => {
+			e.preventDefault();
+			deferredInstallPrompt = e;
+			if (dotNetInstallHelper) {
+				dotNetInstallHelper.invokeMethodAsync('OnInstallAvailable');
+			}
+		});
+
+		window.registerInstallHelper = (helper) => {
+			dotNetInstallHelper = helper;
+			if (deferredInstallPrompt) {
+				helper.invokeMethodAsync('OnInstallAvailable');
+			}
+		};
+
+		window.promptInstall = async () => {
+			if (!deferredInstallPrompt) return;
+			deferredInstallPrompt.prompt();
+			await deferredInstallPrompt.userChoice;
+			deferredInstallPrompt = null;
+		};
+	</script>
+
 	<script src="_framework/blazor.webassembly.js"></script>
 	<script>navigator.serviceWorker.register('service-worker.js');</script>
 
